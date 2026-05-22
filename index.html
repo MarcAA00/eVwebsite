@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ForschungsKommunikation – ResearchCommunication e.V.</title>
+  <meta name="description" content="A Berlin-based non-profit association dedicated to helping researchers communicate their findings — within the scientific community and to broader audiences.">
+  <meta name="robots" content="index, follow">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #1a3a5c;
+      --navy-dark:  #122840;
+      --teal:       #2a9d8f;
+      --teal-dark:  #21857a;
+      --teal-light: #dff2f0;
+      --white:      #ffffff;
+      --surface:    #f5f7fb;
+      --text:       #1a1a2e;
+      --muted:      #64748b;
+      --border:     #e2e8f0;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    /* ── Navigation ── */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      height: 62px;
+    }
+    .nav-wordmark {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+    .lang-switch {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 3px;
+    }
+    .lang-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      padding: 0.3rem 0.65rem;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+      transition: all 0.15s ease;
+    }
+    .lang-btn:hover { color: var(--navy); }
+    .lang-btn.active {
+      background: var(--white);
+      color: var(--navy);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(140deg, var(--navy) 0%, #1e4f8c 60%, #1a5e78 100%);
+      color: white;
+      padding: 7rem 2rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -5%;
+      width: 55vw;
+      height: 55vw;
+      max-width: 680px;
+      max-height: 680px;
+      background: radial-gradient(circle, rgba(42, 157, 143, 0.22) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -10%;
+      left: -8%;
+      width: 40vw;
+      height: 40vw;
+      max-width: 500px;
+      max-height: 500px;
+      background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-label {
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: rgba(255, 255, 255, 0.65);
+      margin-bottom: 1.6rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5.5vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      color: white;
+      margin-bottom: 1.6rem;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: #7ae8de;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: rgba(255, 255, 255, 0.78);
+      max-width: 610px;
+      line-height: 1.75;
+      margin-bottom: 2.8rem;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--teal);
+      color: white;
+      text-decoration: none;
+      padding: 0.85rem 2rem;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 4px 14px rgba(42,157,143,0.4);
+    }
+    .btn-primary:hover {
+      background: var(--teal-dark);
+      transform: translateY(-1px);
+    }
+
+    /* ── Sections ── */
+    .section { padding: 5.5rem 2rem; }
+    .section-alt { background: var(--surface); }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .section h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .section-rule {
+      width: 100%;
+      height: 3px;
+      background: var(--teal);
+      border-radius: 2px;
+      margin-bottom: 2rem;
+    }
+    .section p {
+      font-size: 1.02rem;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      max-width: 700px;
+    }
+    .section p:last-child { margin-bottom: 0; }
+
+    .callout {
+      margin-top: 2rem;
+      padding: 1.25rem 1.6rem;
+      background: var(--teal-light);
+      border-left: 3px solid var(--teal);
+      border-radius: 0 7px 7px 0;
+      font-size: 0.96rem;
+      color: #1a4844;
+      line-height: 1.65;
+    }
+
+    /* ── Pillars ── */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .pillar {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.6rem 1.5rem;
+    }
+    .pillar-icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .pillar h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+    .pillar p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* ── Contact ── */
+    .contact-section {
+      background: var(--navy-dark);
+      color: white;
+    }
+    .contact-section h2 { color: white; }
+    .contact-section .section-rule { background: var(--teal); }
+    .contact-section p { color: rgba(255,255,255,0.75); }
+    .email-link {
+      display: inline-block;
+      margin-top: 1.75rem;
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding-bottom: 3px;
+      border-bottom: 2px solid var(--teal);
+      transition: color 0.2s;
+    }
+    .email-link:hover { color: #7ae8de; }
+
+    /* ── Footer ── */
+    footer {
+      background: #0e1f33;
+      color: rgba(255,255,255,0.45);
+      padding: 2rem 2rem;
+      font-size: 0.84rem;
+    }
+    .footer-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-meta { line-height: 1.6; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: rgba(255,255,255,0.45);
+      font-size: 0.84rem;
+      text-decoration: underline;
+      padding: 0;
+      transition: color 0.15s;
+      font-family: var(--font);
+    }
+    .footer-btn:hover { color: rgba(255,255,255,0.9); }
+
+    /* ── Modals ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 200;
+      overflow-y: auto;
+      padding: 2rem 1rem 4rem;
+    }
+    .modal-box {
+      background: var(--white);
+      max-width: 720px;
+      margin: 2rem auto 0;
+      border-radius: 12px;
+      padding: 2.8rem 2.8rem 3rem;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1.4rem;
+      right: 1.4rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+    .modal-close:hover {
+      background: var(--border);
+      color: var(--text);
+    }
+    .modal-box h2 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+    .modal-divider {
+      width: 36px;
+      height: 3px;
+      background: var(--teal);
+      border-radius: 2px;
+      margin-bottom: 2rem;
+    }
+    .modal-box h3 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal-dark);
+      margin: 1.75rem 0 0.5rem;
+    }
+    .modal-box h3:first-of-type { margin-top: 0; }
+    .modal-box p, .modal-box address {
+      font-size: 0.94rem;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      line-height: 1.65;
+      font-style: normal;
+    }
+    .modal-box a { color: var(--teal); }
+    .modal-box .note {
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .hero { padding: 5rem 1.5rem 4rem; }
+      .section { padding: 4rem 1.5rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .modal-box { padding: 2rem 1.5rem 2.5rem; }
+      .pillars { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─────────────────── NAVIGATION ─────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <div class="lang-switch" role="group" aria-label="Language selection">
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')" aria-pressed="true">EN</button>
+      <button class="lang-btn"        id="btn-de" onclick="setLang('de')" aria-pressed="false">DE</button>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════════════
+     ENGLISH CONTENT
+════════════════════════════════════════════════════ -->
+<div id="content-en">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="hero-label">ForschungsKommunikation – ResearchCommunication e.V.</span>
+      <h1>Supporting researchers<br>in <em>communicating their work.</em></h1>
+      <p class="hero-sub">A Berlin-based non-profit association dedicated to helping researchers communicate their findings — within the scientific community and to the broader world.</p>
+      <a href="mailto:info@researchcommunication.de" class="btn-primary">Get in touch →</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section">
+    <div class="container">
+      <h2>Why research communication matters</h2>
+      <div class="section-rule"></div>
+      <p>Researchers today navigate a rapidly expanding landscape of communication channels, formats, and audiences. Journals and conference papers remain essential, but the ability to engage beyond those channels — with policymakers, practitioners, journalists, and the public — has become equally important to the reach and relevance of research.</p>
+      <p>Effective communication is not a peripheral skill. It shapes careers, determines whether findings influence practice, and decides whether scientific knowledge stays locked within small peer networks or helps drive broader change. Yet researchers are rarely given structured support to develop these competencies.</p>
+      <p>ForschungsKommunikation – ResearchCommunication e.V. was founded to address exactly that gap.</p>
+    </div>
+  </section>
+
+  <!-- What we do -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2>What we do</h2>
+      <div class="section-rule"></div>
+      <p>Our work focuses on supporting researchers across career stages — from doctoral candidates and early-career researchers to established scientists — in developing and practicing communication skills across a range of contexts and audiences.</p>
+
+      <div class="pillars">
+        <div class="pillar">
+          <span class="pillar-icon">🔬</span>
+          <h3>Science-to-science</h3>
+          <p>Strengthening communication within the research community to amplify the reach and impact of scientific work.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">🌍</span>
+          <h3>Beyond academia</h3>
+          <p>Supporting researchers in engaging with non-specialist audiences, from the general public to decision-makers.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">📈</span>
+          <h3>Career development</h3>
+          <p>Building the skills, networks, and resources researchers need at every stage of their career.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        Further details will follow in the months to come.
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section contact-section">
+    <div class="container">
+      <h2>Get in touch</h2>
+      <div class="section-rule"></div>
+      <p>We welcome inquiries from researchers, institutions, and potential partner organizations. Whether you're interested in membership, collaboration, or simply learning more about our work — we'd love to hear from you.</p>
+      <a href="mailto:info@researchcommunication.de" class="email-link">info@researchcommunication.de</a>
+    </div>
+  </section>
+
+</div><!-- /content-en -->
+
+
+<!-- ═══════════════════════════════════════════════════
+     GERMAN CONTENT
+════════════════════════════════════════════════════ -->
+<div id="content-de" style="display:none">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="hero-label">ForschungsKommunikation – ResearchCommunication e.V.</span>
+      <h1>Forschende dabei unterstützen,<br><em>ihre Arbeit zu kommunizieren.</em></h1>
+      <p class="hero-sub">Ein gemeinnütziger Verein mit Sitz in Berlin, der Wissenschaftlerinnen und Wissenschaftler dabei unterstützt, ihre Forschungsergebnisse zu kommunizieren – innerhalb der Wissenschaft und darüber hinaus.</p>
+      <a href="mailto:info@researchcommunication.de" class="btn-primary">Kontakt aufnehmen →</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section">
+    <div class="container">
+      <h2>Warum Wissenschaftskommunikation wichtig ist</h2>
+      <div class="section-rule"></div>
+      <p>Forschende bewegen sich heute in einer sich rasch entwickelnden Landschaft von Kommunikationskanälen, Formaten und Zielgruppen. Zeitschriften und Konferenzbeiträge bleiben unverzichtbar, aber die Fähigkeit, über diese Kanäle hinaus zu wirken – gegenüber politischen Entscheidungsträgern, Praktizierenden, Journalistinnen und der Öffentlichkeit – ist für Reichweite und Relevanz von Forschung ebenso wichtig geworden.</p>
+      <p>Effektive Kommunikation ist keine periphere Fähigkeit. Sie prägt Karrieren, entscheidet darüber, ob Forschungsergebnisse die Praxis beeinflussen, und bestimmt, ob wissenschaftliches Wissen in kleinen Peer-Netzwerken verbleibt oder breiten Wandel anstoßen kann. Dennoch erhalten Forschende selten strukturierte Unterstützung beim Aufbau dieser Kompetenzen.</p>
+      <p>ForschungsKommunikation – ResearchCommunication e.V. wurde gegründet, um genau diese Lücke zu schließen.</p>
+    </div>
+  </section>
+
+  <!-- What we do -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2>Was wir tun</h2>
+      <div class="section-rule"></div>
+      <p>Unsere Arbeit richtet sich an Forschende auf allen Karrierestufen – von Promovierenden und Postdoktoranden bis zu erfahrenen Wissenschaftlerinnen und Wissenschaftlern – und unterstützt sie dabei, Kommunikationskompetenzen in unterschiedlichen Kontexten und gegenüber verschiedenen Zielgruppen zu entwickeln und anzuwenden.</p>
+
+      <div class="pillars">
+        <div class="pillar">
+          <span class="pillar-icon">🔬</span>
+          <h3>Wissenschaft zur Wissenschaft</h3>
+          <p>Stärkung der Kommunikation innerhalb der Forschungsgemeinschaft, um Reichweite und Wirkung wissenschaftlicher Arbeit zu erhöhen.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">🌍</span>
+          <h3>Jenseits der Wissenschaft</h3>
+          <p>Unterstützung von Forschenden im Dialog mit nichtfachlichen Zielgruppen – von der Öffentlichkeit bis zu Entscheidungsträgern.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">📈</span>
+          <h3>Karriereentwicklung</h3>
+          <p>Aufbau der Kompetenzen, Netzwerke und Ressourcen, die Forschende auf jeder Karrierestufe brauchen.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        Weitere Details werden in den kommenden Monaten folgen.
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section contact-section">
+    <div class="container">
+      <h2>Kontakt aufnehmen</h2>
+      <div class="section-rule"></div>
+      <p>Wir freuen uns über Anfragen von Forschenden, Institutionen und potenziellen Partnerorganisationen. Ob Mitgliedschaft, Kooperation oder einfach mehr Informationen zu unserer Arbeit – wir hören gerne von Ihnen.</p>
+      <a href="mailto:info@researchcommunication.de" class="email-link">info@researchcommunication.de</a>
+    </div>
+  </section>
+
+</div><!-- /content-de -->
+
+
+<!-- ─────────────────── FOOTER ─────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-meta">
+      <span id="footer-copy-en">© 2026 ForschungsKommunikation – ResearchCommunication e.V. · Berlin · Founded December 2025</span>
+      <span id="footer-copy-de" style="display:none">© 2026 ForschungsKommunikation – ResearchCommunication e.V. · Berlin · Gegründet Dezember 2025</span>
+    </div>
+    <div class="footer-links">
+      <button class="footer-btn" onclick="openModal('impressum')">Impressum</button>
+      <button class="footer-btn" onclick="openModal('datenschutz')">
+        <span id="footer-dp-en">Privacy Policy</span>
+        <span id="footer-dp-de" style="display:none">Datenschutz</span>
+      </button>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ─────────────────── MODAL: IMPRESSUM ─────────────────── -->
+<div class="modal-overlay" id="modal-impressum" role="dialog" aria-modal="true" aria-labelledby="impressum-title">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('impressum')" aria-label="Schließen / Close">✕</button>
+    <h2 id="impressum-title">Impressum</h2>
+    <div class="modal-divider"></div>
+
+    <p class="note">Angaben gemäß § 5 TMG / § 18 MStV</p>
+
+    <h3>Vereinsanschrift</h3>
+    <address>
+      ForschungsKommunikation – ResearchCommunication e.V.<br>
+      c/o Marc Abernathy<br>
+      Meraner Str. 4A<br>
+      10825 Berlin<br>
+      Deutschland
+    </address>
+
+    <h3>Kontakt</h3>
+    <p>E-Mail: <a href="mailto:info@researchcommunication.de">info@researchcommunication.de</a></p>
+
+    <h3>Vertretungsberechtigter Vorstand</h3>
+    <p>
+      1. Vorsitzender: Dr. Carlos Aguilar Trigueros<br>
+      2. Vorsitzender: Marc Abernathy<br>
+      Stellvertretender Vorsitzender: Dr. Milos Bielcik
+    </p>
+
+    <h3>Vereinsregister</h3>
+    <p>
+      Registergericht: Amtsgericht Charlottenburg<br>
+      Vereinsregisternummer: VR 42463 B<br>
+      Eingetragen am: 19. März 2026
+    </p>
+
+    <h3>Gemeinnützigkeit</h3>
+    <p>Der Verein verfolgt ausschließlich und unmittelbar gemeinnützige Zwecke im Sinne der §§ 51 ff. AO.</p>
+    <p>Feststellungsbescheid nach § 60a Abs. 1 AO vom 16. April 2026, ausgestellt durch das Finanzamt für Körperschaften I, Berlin (Aktenzeichen: 27/640/51698 F33).</p>
+    <p>Anerkannte steuerbegünstigte Zwecke: Förderung von Wissenschaft und Forschung (§ 52 Abs. 2 S. 1 Nr. 1 AO); Förderung der Volks- und Berufsbildung (§ 52 Abs. 2 S. 1 Nr. 7 AO).</p>
+
+    <h3>Inhaltlich Verantwortlicher</h3>
+    <p>Marc Abernathy, Meraner Str. 4A, 10825 Berlin<br>
+    <span class="note">(Verantwortlicher i. S. d. § 18 Abs. 2 MStV)</span></p>
+
+    <h3>Haftungshinweis / Disclaimer</h3>
+    <p>Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt verlinkter Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
+    <p>Despite careful review, we accept no liability for the content of external links. The operators of linked pages are solely responsible for their content.</p>
+  </div>
+</div>
+
+
+<!-- ─────────────────── MODAL: DATENSCHUTZ ─────────────────── -->
+<div class="modal-overlay" id="modal-datenschutz" role="dialog" aria-modal="true" aria-labelledby="datenschutz-title">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('datenschutz')" aria-label="Schließen / Close">✕</button>
+    <h2 id="datenschutz-title">Datenschutzerklärung · Privacy Policy</h2>
+    <div class="modal-divider"></div>
+
+    <p class="note">Gemäß DSGVO / In accordance with GDPR (EU) 2016/679</p>
+
+    <h3>Verantwortlicher / Data Controller</h3>
+    <address>
+      ForschungsKommunikation – ResearchCommunication e.V.<br>
+      c/o Marc Abernathy, Meraner Str. 4A, 10825 Berlin<br>
+      E-Mail: <a href="mailto:info@researchcommunication.de">info@researchcommunication.de</a>
+    </address>
+
+    <h3>Erhebung von Daten beim Websitebesuch / Server Log Files</h3>
+    <p>Diese Website erhebt keine personenbezogenen Daten durch Formulare, Tracking-Tools oder Cookies. Beim Aufruf der Website speichert der Hosting-Anbieter technische Zugriffsdaten (Server-Logs), darunter IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene URL sowie Browser-Informationen. Diese Daten dienen ausschließlich der Sicherstellung des technischen Betriebs und werden nicht personenbezogen ausgewertet.</p>
+    <p>This website does not collect personal data via forms, tracking tools, or cookies. Technical access data (server logs) — including IP address, access time, requested URL, and browser details — may be stored by the hosting provider solely for technical operation.</p>
+
+    <h3>Kontaktaufnahme per E-Mail / Contact by Email</h3>
+    <p>Wenn Sie uns per E-Mail kontaktieren, werden die von Ihnen übermittelten Daten ausschließlich zur Bearbeitung Ihrer Anfrage verwendet und nicht an Dritte weitergegeben. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO bzw. Art. 6 Abs. 1 lit. f DSGVO. If you contact us by email, the data you provide will be used solely to handle your inquiry and will not be passed to third parties.</p>
+
+    <h3>Cookies</h3>
+    <p>Diese Website verwendet keine Cookies. / This website does not use cookies.</p>
+
+    <h3>Hosting / Auftragsverarbeiter</h3>
+    <p>Diese Website wird gehostet von / This website is hosted by:</p>
+    <address>
+      GitHub, Inc.<br>
+      88 Colin P Kelly Jr St, San Francisco, CA 94107, USA<br>
+      (A subsidiary of Microsoft Corporation)<br>
+      <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub Privacy Statement</a>
+    </address>
+    <p>Beim Aufruf der Website werden durch GitHub technische Zugriffsdaten (IP-Adresse, Browsertyp, aufgerufene Seiten, Datum/Uhrzeit) verarbeitet. GitHub verarbeitet diese Daten im Rahmen eines Auftragsverarbeitungsverhältnisses. Eine Übermittlung in die USA erfolgt auf Basis von Standardvertragsklauseln gemäß Art. 46 Abs. 2 lit. c DSGVO.</p>
+    <p>When the website is accessed, GitHub processes technical access data (IP address, browser type, pages visited, date/time) as a data processor. Data transfers to the USA are based on standard contractual clauses pursuant to Art. 46(2)(c) GDPR.</p>
+    <p class="note">Hinweis: Die Domain researchcommunication.de ist bei Wix.com Ltd. registriert. Wix fungiert ausschließlich als Domain-Registrar und verarbeitet keine inhaltsbezogenen Websitedaten. / Note: The domain researchcommunication.de is registered with Wix.com Ltd., which acts solely as domain registrar and does not process any website content data.</p>
+
+    <h3>Ihre Rechte / Your Rights (Art. 15–22 DSGVO/GDPR)</h3>
+    <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie das Recht auf Beschwerde bei einer Aufsichtsbehörde. In Berlin: Berliner Beauftragte für Datenschutz und Informationsfreiheit, <a href="https://www.datenschutz-berlin.de" target="_blank" rel="noopener noreferrer">www.datenschutz-berlin.de</a>.</p>
+    <p>You have the right of access, rectification, erasure, restriction, portability, and to lodge a complaint with a supervisory authority (Berlin: <a href="https://www.datenschutz-berlin.de" target="_blank" rel="noopener noreferrer">www.datenschutz-berlin.de</a>).</p>
+
+    <p class="note" style="margin-top:1.5rem;">Stand / Last updated: Mai 2026</p>
+  </div>
+</div>
+
+
+<!-- ─────────────────── SCRIPTS ─────────────────── -->
+<script>
+  function setLang(lang) {
+    var isEN = lang === 'en';
+    // Content blocks
+    document.getElementById('content-en').style.display = isEN ? '' : 'none';
+    document.getElementById('content-de').style.display = isEN ? 'none' : '';
+    // Buttons
+    document.getElementById('btn-en').classList.toggle('active', isEN);
+    document.getElementById('btn-de').classList.toggle('active', !isEN);
+    document.getElementById('btn-en').setAttribute('aria-pressed', isEN ? 'true' : 'false');
+    document.getElementById('btn-de').setAttribute('aria-pressed', isEN ? 'false' : 'true');
+    // Footer strings
+    document.getElementById('footer-copy-en').style.display = isEN ? '' : 'none';
+    document.getElementById('footer-copy-de').style.display = isEN ? 'none' : '';
+    document.getElementById('footer-dp-en').style.display = isEN ? '' : 'none';
+    document.getElementById('footer-dp-de').style.display = isEN ? 'none' : '';
+    // HTML lang attribute
+    document.documentElement.lang = lang;
+  }
+
+  function openModal(id) {
+    document.getElementById('modal-' + id).style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(id) {
+    document.getElementById('modal-' + id).style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  // Close on overlay click
+  document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) {
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    });
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay').forEach(function(m) {
+        m.style.display = 'none';
+      });
+      document.body.style.overflow = '';
+    }
+  });
+</script>
+
+</body>
+</html>
